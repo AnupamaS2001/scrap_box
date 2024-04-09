@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{%url 'scrap_list'%}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'wishlistdetail'%}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{%url 'scrap_add'%}">Add Product</a>
+              </li>
+              
+            </ul>
+            <li class="nav-item ms-auto">
+              <a class="nav-link" href="{%url 'signout'%}">Logout</a>
+            </li>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+      <div class="row d-flex ">
+          {%for scrap in data.scrap.all%}
+          {%if scrap.user != request.user%}
+          <div class="col-lg-4 col-md-5">
+            <div class="card bg-body-secondary" style="width: 18rem; width: auto; margin-top: 20%;" >
+              <img src="{{scrap.scrap_image.url}}" class="card-img-top rounded" alt="" style="width: 45%;  height: 200px; margin: auto; margin-top: 10px;">
+              <div class="card-body">
+                <h5 class="card-title">{{scrap.name}}</h5>
+                <span class="fw-bold">Rs{{scrap.price}}</span>
+              </div>
+              <ul class="list-group list-group-flush ">
+                <li class="list-group-item bg-body-secondary">{{scrap.category}}</li>
+                
+              </ul>
+              
+              <div class="card-body">
+                <a href="{%url 'scrap_detail' scrap.id %}" class="btn btn-outline-primary">Details</a>
+                
+                
+              </div>
+          </div>
+          </div>
+          {%endif%}
+          {%endfor%}
+      </div>
+      
+  </div>
+
+</body>
+</html>   
